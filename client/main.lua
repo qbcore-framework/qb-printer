@@ -1,26 +1,36 @@
-QBCore = nil
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
-            Citizen.Wait(200)
-        end
-    end
-end)
-
--- Code
-
 RegisterNetEvent('qb-printer:client:UseDocument')
 AddEventHandler('qb-printer:client:UseDocument', function(ItemData)
     local ped = PlayerPedId()
-    local DocumentUrl = ItemData.info.url ~= nil and ItemData.info.url or false    
+    local DocumentUrl = ItemData.info.url ~= nil and ItemData.info.url or false
     SendNUIMessage({
         action = "open",
         url = DocumentUrl
     })
     SetNuiFocus(true, false)
+end)
+
+RegisterNetEvent('qb-printer:client:SpawnPrinter')
+AddEventHandler('qb-printer:client:SpawnPrinter', function(ItemData)
+    local playerPed = GetPlayerPed(-1)
+    local coords    = GetEntityCoords(playerPed)
+    local forward   = GetEntityForwardVector(playerPed)
+    local x, y, z   = table.unpack(coords + forward * 1.0)
+
+    local model = GetHashKey('prop_printer_01')
+    RequestModel(model)
+    while (not HasModelLoaded(model)) do
+        Wait(1)
+    end
+    obj = CreateObject(model, x, y, z, true, false, true)
+    PlaceObjectOnGroundProperly(obj)
+    SetModelAsNoLongerNeeded(model)
+    SetEntityAsMissionEntity(obj)
+end)
+
+RegisterNUICallback('SaveDocument', function(data)
+    if data.url ~= nil then
+        TriggerServerEvent('qb-printer:server:SaveDocument', data.url)
+    end
 end)
 
 RegisterNUICallback('CloseDocument', function()
@@ -43,20 +53,20 @@ function DrawText3Ds(x, y, z, text)
 end
 
 Citizen.CreateThread(function()
-    SetNuiFocus(true, true)
     while true do
         local ped = PlayerPedId()
         local pos = GetEntityCoords(ped)
 
-        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 50.0, GetHashKey("v_med_cor_photocopy"), false, false, false)
+        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, GetHashKey('prop_printer_01'), false, false, false)
 
         if PrinterObject ~= 0 then
             local PrinterCoords = GetEntityCoords(PrinterObject)
-            DrawText3Ds(PrinterCoords.x, PrinterCoords.y, PrinterCoords.z, '~g~E~w~ - To Use Printer')
-            if IsControlJustPressed(0, 38) then
+            DrawText3Ds(PrinterCoords.x, PrinterCoords.y, PrinterCoords.z, Config.Text)
+            if IsControlJustPressed(0, Config.Key) then
                 SendNUIMessage({
                     action = "start"
                 })
+                SetNuiFocus(true, true)
             end
         else
             Citizen.Wait(1000)
