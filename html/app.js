@@ -8,10 +8,23 @@ $(document).ready(function(){
             case "open":
                 Printer.Open(event.data);
                 break;
+            case "start":
+                Printer.Start(event.data);
+                break;
             case "close":
                 Printer.Close(event.data);
                 break;
         }
+    });
+});
+
+$(document).ready(function() {
+    $('.printer-accept').click(function() {
+        Printer.Save();
+        Printer.Close();
+    });
+    $('.printer-decline').click(function() {
+        Printer.Close();
     });
 });
 
@@ -35,7 +48,18 @@ Printer.Open = function(data) {
     }
 }
 
+Printer.Start = function(data) {
+    $(".printer-container").fadeIn(150);
+}
+
+Printer.Save = function(data) {
+    $.post('https://qb-printer/SaveDocument', JSON.stringify({
+        url: $('.printer-input').val()
+    }));
+}
+
 Printer.Close = function(data) {
+    $(".printer-container").fadeOut(150);
     $(".document-container").fadeOut(150);
     $.post('https://qb-printer/CloseDocument');
 }
