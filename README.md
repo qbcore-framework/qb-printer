@@ -1,6 +1,8 @@
 # qb-printer
 Printer For QB-Core
 
+* ATTENTION: To have this working correctly you MUST change shared.lua as follows: `Search for "printerdocument" and make ["unique"] = true` otherwise documents WILL STACK and You'll be able to see only latest.
+
 * Config for the Key to use the printer added....Didn't make it a KeyBind since it's not really gonna be used a lot.
 * Config for Text shown when closeby a printer.
 * Config table for valid extensions added.
