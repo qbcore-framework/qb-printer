@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
 
 body {
     margin: 0;
@@ -7,7 +7,7 @@ body {
 
 .container {
     height: 100vh;
-    font-family: "Lato", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .document-container {
@@ -77,17 +77,11 @@ body {
     height: 4.5vh;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 1.5vh 1.5vh 1.5vh 1.5vh;
-
-
     outline: none;
     border: none;
-
     text-align: center;
-
-    font-family: sans-serif;
-
+    font-family: 'Poppins', sans-serif;
     transition: .2s ease-in-out;
-
     border-bottom: .4vh solid rgba(0, 128, 0, 0);
 }
 
