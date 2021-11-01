@@ -16,7 +16,7 @@ AddEventHandler('qb-printer:client:SpawnPrinter', function(ItemData)
     local forward   = GetEntityForwardVector(playerPed)
     local x, y, z   = table.unpack(coords + forward * 1.0)
 
-    local model = GetHashKey('prop_printer_01')
+    local model = `prop_printer_01`
     RequestModel(model)
     while (not HasModelLoaded(model)) do
         Wait(1)
@@ -57,7 +57,7 @@ Citizen.CreateThread(function()
         local ped = PlayerPedId()
         local pos = GetEntityCoords(ped)
 
-        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, GetHashKey('prop_printer_01'), false, false, false)
+        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, `prop_printer_01`, false, false, false)
 
         if PrinterObject ~= 0 then
             local PrinterCoords = GetEntityCoords(PrinterObject)
