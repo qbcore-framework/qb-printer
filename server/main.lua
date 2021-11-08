@@ -7,8 +7,7 @@ QBCore.Commands.Add("spawnprinter", "Spawn a printer", {}, true, function(source
 	TriggerClientEvent('qb-printer:client:SpawnPrinter', source)
 end, "admin")
 
-RegisterServerEvent('qb-printer:server:SaveDocument')
-AddEventHandler('qb-printer:server:SaveDocument', function(url)
+RegisterNetEvent('qb-printer:server:SaveDocument', function(url)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local info = {}
