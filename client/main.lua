@@ -1,4 +1,7 @@
 -- Variables
+
+QBCore = exports['qb-core']:GetCoreObject()
+
 -- Functions
 
 function DrawText3Ds(x, y, z, text)
