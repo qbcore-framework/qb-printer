@@ -63,7 +63,7 @@ CreateThread(function()
     while true do
         local ped = PlayerPedId()
         local pos = GetEntityCoords(ped)
-        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, `prop_printer_01`, false, false, false)
+        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 0.5, `prop_printer_01`, false, false, false)
 
         if PrinterObject ~= 0 then
             local PrinterCoords = GetEntityCoords(PrinterObject)
