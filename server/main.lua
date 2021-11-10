@@ -1,3 +1,5 @@
+QBCore = exports['qb-core']:GetCoreObject()
+
 QBCore.Functions.CreateUseableItem("printerdocument", function(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     TriggerClientEvent('qb-printer:client:UseDocument', source, item)
