@@ -1,28 +1,6 @@
--- Variables
-
-QBCore = exports['qb-core']:GetCoreObject()
-
--- Functions
-
-function DrawText3Ds(x, y, z, text)
-	SetTextScale(0.35, 0.35)
-    SetTextFont(4)
-    SetTextProportional(1)
-    SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
-    SetTextCentre(true)
-    AddTextComponentString(text)
-    SetDrawOrigin(x,y,z, 0)
-    DrawText(0.0, 0.0)
-    local factor = (string.len(text)) / 370
-    DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
-    ClearDrawOrigin()
-end
-
 -- Events
 
 RegisterNetEvent('qb-printer:client:UseDocument', function(ItemData)
-    local ped = PlayerPedId()
     local DocumentUrl = ItemData.info.url ~= nil and ItemData.info.url or false
     SendNUIMessage({
         action = "open",
@@ -51,7 +29,7 @@ end)
 -- NUI
 
 RegisterNUICallback('SaveDocument', function(data)
-    if data.url ~= nil then
+    if data.url then
         TriggerServerEvent('qb-printer:server:SaveDocument', data.url)
     end
 end)
@@ -60,27 +38,16 @@ RegisterNUICallback('CloseDocument', function()
     SetNuiFocus(false, false)
 end)
 
--- Threads
+-- Command
 
-CreateThread(function()
-    while true do
-        local ped = PlayerPedId()
-        local pos = GetEntityCoords(ped)
-        local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, `prop_printer_01`, false, false, false)
-
-        if PrinterObject ~= 0 then
-            local PrinterCoords = GetEntityCoords(PrinterObject)
-            DrawText3Ds(PrinterCoords.x, PrinterCoords.y, PrinterCoords.z, Config.Text)
-            if IsControlJustPressed(0, Config.Key) then
-                SendNUIMessage({
-                    action = "start"
-                })
-                SetNuiFocus(true, true)
-            end
-        else
-            Wait(1000)
-        end
-
-        Wait(3)
+RegisterCommand('useprinter', function()
+    local ped = PlayerPedId()
+    local pos = GetEntityCoords(ped)
+    local PrinterObject = GetClosestObjectOfType(pos.x, pos.y, pos.z, 1.5, `prop_printer_01`, false, false, false)
+    if PrinterObject ~= 0 then
+        SendNUIMessage({
+            action = "start"
+        })
+        SetNuiFocus(true, true)
     end
 end)

@@ -1,16 +1,10 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
 game 'gta5'
-author 'QBCore Framework Community'
 
 description 'QB-Printer'
-version '1.0.1'
+version '1.0.0'
 
-ui_page "html/index.html"
-
-shared_scripts {
-    'config.lua'
-}
-
+ui_page 'html/index.html'
 client_script 'client/main.lua'
 server_script 'server/main.lua'
 
@@ -21,3 +15,5 @@ files {
     'html/*.css',
     'html/*.png',
 }
+
+lua54 'yes'
