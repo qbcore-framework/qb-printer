@@ -1,65 +1,65 @@
-Printer = {}
+PrinterBox = {}
 
-$(document).ready(function(){
-    window.addEventListener('message', function(event){
+$(document).ready(function() {
+    window.addEventListener('message', function(event) {
         var action = event.data.action;
 
-        switch(action) {
-            case "open":
-                Printer.Open(event.data);
+        switch (action) {
+            case "openprinternui":
+                PrinterBox.Open(event.data);
                 break;
-            case "start":
-                Printer.Start(event.data);
+            case "startprinternui":
+                PrinterBox.Start(event.data);
                 break;
             case "close":
-                Printer.Close(event.data);
+                PrinterBox.Close(event.data);
                 break;
         }
     });
 });
 
 $(document).ready(function() {
-    $('.printer-accept').click(function() {
-        Printer.Save();
-        Printer.Close();
+    $('.printerbox-accept').click(function() {
+        PrinterBox.Save();
+        PrinterBox.Close();
     });
-    $('.printer-decline').click(function() {
-        Printer.Close();
+    $('.printerbox-decline').click(function() {
+        PrinterBox.Close();
     });
 });
 
 $(document).on('keydown', function() {
-    switch(event.keyCode) {
+    switch (event.keyCode) {
         case 27: // ESC
-            Printer.Close();
+            PrinterBox.Close();
             break;
         case 9: // ESC
-            Printer.Close();
+            PrinterBox.Close();
             break;
     }
 });
 
-Printer.Open = function(data) {
+PrinterBox.Open = function(data) {
     if (data.url) {
-        $(".document-container").fadeIn(150);
+        $(".paper-container").fadeIn(150);
         $(".document-image").attr('src', data.url);
     } else {
         console.log('No document is linked to it!!!!!')
     }
 }
 
-Printer.Start = function(data) {
-    $(".printer-container").fadeIn(150);
+PrinterBox.Start = function(data) {
+    $(".printerbox-container").fadeIn(150);
 }
 
-Printer.Save = function(data) {
+PrinterBox.Save = function(data) {
     $.post('https://qb-printer/SaveDocument', JSON.stringify({
-        url: $('.printer-input').val()
+        url: $('.printerboxurl-input').val()
     }));
 }
 
-Printer.Close = function(data) {
-    $(".printer-container").fadeOut(150);
-    $(".document-container").fadeOut(150);
+PrinterBox.Close = function(data) {
+    $(".printerbox-container").fadeOut(150);
+    $(".paper-container").fadeOut(150);
     $.post('https://qb-printer/CloseDocument');
 }
