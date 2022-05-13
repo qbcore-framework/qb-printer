@@ -9,7 +9,7 @@ RegisterNetEvent('qb-printer:client:UseDocument', function(ItemData)
     SetNuiFocus(true, false)
 end)
 
-RegisterNetEvent('qb-printer:client:SpawnPrinter', function(ItemData)
+RegisterNetEvent('qb-printer:client:SpawnPrinter', function()
     local playerPed = PlayerPedId()
     local coords    = GetEntityCoords(playerPed)
     local forward   = GetEntityForwardVector(playerPed)
@@ -20,7 +20,7 @@ RegisterNetEvent('qb-printer:client:SpawnPrinter', function(ItemData)
     while (not HasModelLoaded(model)) do
         Wait(1)
     end
-    obj = CreateObject(model, x, y, z, true, false, true)
+    local obj = CreateObject(model, x, y, z, true, false, true)
     PlaceObjectOnGroundProperly(obj)
     SetModelAsNoLongerNeeded(model)
     SetEntityAsMissionEntity(obj)
