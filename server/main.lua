@@ -13,7 +13,7 @@ QBCore.Functions.CreateUseableItem("printerdocument", function(source, item)
     TriggerClientEvent('qb-printer:client:UseDocument', source, item)
 end)
 
-QBCore.Commands.Add("spawnprinter", "Spawn a printer", {}, true, function(source, args)
+QBCore.Commands.Add("spawnprinter", "Spawn a printer", {}, true, function(source, _)
 	TriggerClientEvent('qb-printer:client:SpawnPrinter', source)
 end, "admin")
 
