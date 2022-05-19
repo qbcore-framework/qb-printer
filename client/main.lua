@@ -28,14 +28,16 @@ end)
 
 -- NUI
 
-RegisterNUICallback('SaveDocument', function(data)
+RegisterNUICallback('SaveDocument', function(data, cb)
     if data.url then
         TriggerServerEvent('qb-printer:server:SaveDocument', data.url)
     end
+    cb('ok')
 end)
 
-RegisterNUICallback('CloseDocument', function()
+RegisterNUICallback('CloseDocument', function(_, cb)
     SetNuiFocus(false, false)
+    cb('ok')
 end)
 
 -- Command
