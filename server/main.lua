@@ -34,7 +34,7 @@ RegisterNetEvent('qb-printer:server:SaveDocument', function(url)
         end
     end
     if url ~= nil then
-        if urlStart ~= nil then
+        if urlEnd ~= nil then
             local host = string.sub(url, urlStart, urlEnd)
             local validexts = ValidExtensions
             local validHosts = ValidHosts
