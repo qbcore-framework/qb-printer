@@ -1,5 +1,3 @@
--- Events
-
 RegisterNetEvent('qb-printer:client:UseDocument', function(ItemData)
     local DocumentUrl = ItemData.info.url ~= nil and ItemData.info.url or false
     SendNUIMessage({
