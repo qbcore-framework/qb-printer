@@ -58,7 +58,7 @@ RegisterNetEvent('qb-printer:printer',function()
     SetNuiFocus(true, true)
 end)
 
-if Config.UseTarget then 
+if Config.UseTarget then
     CreateThread(function()
         exports['qb-target']:AddTargetModel("prop_printer_01", {
             options = {
