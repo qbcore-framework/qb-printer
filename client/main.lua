@@ -1,5 +1,3 @@
--- Events
-
 RegisterNetEvent('qb-printer:client:UseDocument', function(ItemData)
     local DocumentUrl = ItemData.info.url ~= nil and ItemData.info.url or false
     SendNUIMessage({
@@ -53,3 +51,25 @@ RegisterCommand('useprinter', function()
         SetNuiFocus(true, true)
     end
 end)
+RegisterNetEvent('qb-printer:printer',function()
+    SendNUIMessage({
+        action = "start"
+    })
+    SetNuiFocus(true, true)
+end)
+
+if Config.UseTarget then
+    CreateThread(function()
+        exports['qb-target']:AddTargetModel("prop_printer_01", {
+            options = {
+                {
+                    event = 'qb-printer:printer',
+                    type = 'client',
+                    icon = "fa fa-print	",
+                    label = "Use Printer",
+                },
+            },
+            distance = 1.5,
+        })
+    end)
+end
