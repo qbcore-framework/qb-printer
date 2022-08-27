@@ -66,7 +66,7 @@ if Config.UseTarget then
                     event = 'qb-printer:printer',
                     type = 'client',
                     icon = "fa fa-print	",
-                    label = "Use Printer",
+                    label = Lang:t('info.use_printer'),
                 },
             },
             distance = 1.5,
