@@ -4,7 +4,7 @@ local ValidExtensions = {
     [".png"] = true,
     [".gif"] = true,
     [".jpg"] = true,
-    ["jpeg"] = true
+    [".jpeg"] = true
 }
 
 local ValidExtensionsText = '.png, .gif, .jpg, .jpeg'
