@@ -4,10 +4,11 @@ local ValidExtensions = {
     [".png"] = true,
     [".gif"] = true,
     [".jpg"] = true,
-    ["jpeg"] = true
+    [".jpeg"] = true,
+    [".webp"] = true
 }
 
-local ValidExtensionsText = '.png, .gif, .jpg, .jpeg'
+local ValidExtensionsText = '.png, .gif, .jpg, .jpeg, .webp'
 
 QBCore.Functions.CreateUseableItem("printerdocument", function(source, item)
     TriggerClientEvent('qb-printer:client:UseDocument', source, item)
